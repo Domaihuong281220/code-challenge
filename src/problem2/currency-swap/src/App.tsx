@@ -10,6 +10,7 @@ interface TokenPrice {
 
 function App() {
   const [prices, setPrices] = useState<TokenPrice[]>([]);
+  const [usd, setUsd] = useState<number[]>([0]);
   const [tokens, setTokens] = useState<string[]>([]);
   const [fromToken, setFromToken] = useState<string>("");
   const [toToken, setToToken] = useState<string>("");
@@ -24,6 +25,7 @@ function App() {
       .then((res) => {
         const validTokens = res.data.filter((t) => t.price);
         setPrices(validTokens);
+        setUsd(validTokens.map((t) => t.price));
         setTokens(validTokens.map((t) => t.currency));
         setFromToken(validTokens[0].currency);
         setToToken(validTokens[1].currency);
@@ -56,33 +58,55 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-[100vw] flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Currency Swap</h1>
+    <div className="min-h-screen w-[100vw] bg-[url('/bg.jpg')] bg-cover bg-center flex flex-col gap-[4vw] items-center justify-start  pt-[5vw]">
+      <h1
+        className="font-extrabold text-[7vw] text-[#fce4ec]"
+        style={{
+          textShadow: `
+          -0.0075em 0.0075em 0 #fdf2f8,
+          0.005em 0.005em 0 #f8bbd0,
+          0.01em 0.01em 0 #f48fb1,
+          0.015em 0.015em 0 #f06292,
+          0.02em 0.02em 0 #ec407a,
+          0.025em 0.025em 0 #e91e63,
+          0.03em 0.03em 0 #d81b60,
+          0.035em 0.035em 0 #c2185b
+        `
+        }}
+      >
+        Currency Swap
+      </h1>
+      <div className="bg-white flex flex-col justify-between  rounded-2xl shadow-lg p-6 w-[50vw]">
 
-        <TokenSelector label="From" tokens={tokens} selected={fromToken} setSelected={setFromToken} />
-        <input
-          type="number"
-          className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4"
-          placeholder="Enter amount"
-          value={amount}
-          onChange={(e) => setAmount(parseFloat(e.target.value))}
-        />
-
-        <TokenSelector label="To" tokens={tokens} selected={toToken} setSelected={setToToken} />
-        <div className="border border-gray-300 rounded-lg px-4 py-2 w-full mb-4 bg-gray-50">
-          {converted ? converted.toFixed(4) : "0.0000"}
+        <div className="text-center flex space-x-[2vw] items-center justify-center h-[10vw] bg-red-200 px-[2vw] rounded-2xl">
+          <TokenSelector label="From" tokens={tokens} selected={fromToken} tokenprice={usd} setSelected={setFromToken} />
+          <input
+            type="number"
+            className="border border-gray-300 rounded-lg px-4 py-2 w-full text-xl font-bold "
+            placeholder="Enter amount"
+            value={amount}
+            onChange={(e) => setAmount(parseFloat(e.target.value))}
+          />
+        </div>
+        <div className="flex justify-center w-full h-fit">
+          <button
+            onClick={handleSwap}
+            className={`text-black border-[1px] border-gray-300 h-[4vw] bg-white mt-2 text-white font-bold rounded-full hover:bg-grey-200 transition disabled:opacity-50 ${loading ? "w-fit" : "w-[4vw]"}`}
+            disabled={loading}
+          >
+            {loading ? "Swapping..." : <img src="/swap-icon.svg" alt="Swap Icon" className="inline-block w-6 h-6 rotate-90 " />}
+          </button>
+        </div>
+        <div className="text-center flex space-x-[2vw] items-center justify-center h-[10vw] bg-red-200 px-[2vw] rounded-2xl mt-4">
+          <TokenSelector label="To" tokens={tokens} selected={toToken} tokenprice={usd} setSelected={setToToken} />
+          <div className="border border-gray-300 rounded-lg px-4 py-2 w-full bg-gray-50 text-xl font-bold  text-start">
+            {converted ? converted.toFixed(4) : "0.0000"}
+          </div>
         </div>
 
         {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
-        <button
-          onClick={handleSwap}
-          className="w-full mt-2 bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? "Swapping..." : "Swap"}
-        </button>
+
       </div>
     </div>
   );

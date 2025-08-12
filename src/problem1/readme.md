@@ -49,11 +49,13 @@ Time complexity: **O(n)**, space complexity: **O(n)**.
 
 Make sure you have [Node.js](https://nodejs.org/) installed.
 
-### 1. Clone or download this folder
+### 1. Go straight to the project directory
 
 ```bash
-git clone <your-repo-url>
-cd sum_to_n_example
+cd problem1
+```
+
+Then run the script with:
 ```
 
 ### 2. Run with default `n=5`
@@ -92,13 +94,8 @@ sum_to_n_c: 55
 
 This project uses **Mocha** for testing.
 
-### 1. Install Mocha (if not already installed)
 
-```bash
-npm install --save-dev mocha
-```
-
-### 2. Run the tests
+### 1. Run the tests
 
 ```bash
 npx mocha

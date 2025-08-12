@@ -31,10 +31,9 @@ It fetches real-time token prices and allows users to swap assets from one curre
 
 ## 🛠 Installation & Setup
 
-### 1️⃣ Clone the repository
+### 1️⃣ Go straight to the project directory
 
 ```bash
-git clone <your-repo-url>
 cd currency-swap
 ```
 
@@ -86,16 +85,6 @@ currency-swap/
   ]
   ```
 
-* **Token Icons (Optional):**
-  You can display token icons using:
-
-  ```
-  https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/<SYMBOL>.svg
-  ```
-
-  Example:
-  [SWTH Icon](https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/SWTH.svg)
-
 ---
 
 ## 💡 How It Works
@@ -109,21 +98,6 @@ currency-swap/
    converted = (amount * fromPrice) / toPrice
    ```
 5. Clicking **Swap** triggers a loading state and shows a success alert.
-
----
-
-## 🖼 Preview
-
-![Currency Swap Preview](preview.png)
-
----
-
-## ✨ Bonus Ideas
-
-* Add token icons in dropdowns
-* Add animated swap direction button
-* Use `framer-motion` for smooth UI transitions
-* Persist last selected tokens in localStorage
 
 ---
 
