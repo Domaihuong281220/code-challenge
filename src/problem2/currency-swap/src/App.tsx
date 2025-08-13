@@ -79,7 +79,7 @@ function App() {
       <div className="bg-white flex flex-col justify-between  rounded-2xl shadow-lg p-6 w-[50vw]">
 
         <div className="text-center flex space-x-[2vw] items-center justify-center h-[10vw] bg-red-200 px-[2vw] rounded-2xl">
-          <TokenSelector label="From" tokens={tokens} selected={fromToken} tokenprice={usd} setSelected={setFromToken} />
+          <TokenSelector  tokens={tokens} selected={fromToken} tokenprice={usd} setSelected={setFromToken} />
           <input
             type="number"
             className="border border-gray-300 rounded-lg px-4 py-2 w-full text-xl font-bold "
@@ -98,7 +98,7 @@ function App() {
           </button>
         </div>
         <div className="text-center flex space-x-[2vw] items-center justify-center h-[10vw] bg-red-200 px-[2vw] rounded-2xl mt-4">
-          <TokenSelector label="To" tokens={tokens} selected={toToken} tokenprice={usd} setSelected={setToToken} />
+          <TokenSelector  tokens={tokens} selected={toToken} tokenprice={usd} setSelected={setToToken} />
           <div className="border border-gray-300 rounded-lg px-4 py-2 w-full bg-gray-50 text-xl font-bold  text-start">
             {converted ? converted.toFixed(4) : "0.0000"}
           </div>

@@ -1,14 +1,13 @@
 import { useState } from "react";
 
 interface TokenSelectorProps {
-    label: string;
     tokenprice: number[];
     tokens: string[];
     selected: string;
     setSelected: (token: string) => void;
 }
 
-const TokenSelector = ({ label, tokens, selected, tokenprice, setSelected }: TokenSelectorProps) => {
+const TokenSelector = ({ tokens, selected, tokenprice, setSelected }: TokenSelectorProps) => {
     const [open, setOpen] = useState(false);
 
     return (
